@@ -7,3 +7,6 @@ class Player:
 
     def update_roll(self, dice_roll):
         self.previous_rolls = self.previous_rolls[-1], dice_roll
+
+    def double_roll(self):
+        return self.previous_rolls[-1][0] == self.previous_rolls[-1][1]
