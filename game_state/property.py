@@ -12,3 +12,6 @@ class Property:
     def own(self, player):
         self.owned_by = player
         self.type = PropertyType.OWNED
+
+    def __repr__(self):
+        return '{}'.format(self.name)

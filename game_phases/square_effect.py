@@ -16,3 +16,7 @@ class SquareEffect(game_phases.game_phase.GamePhase):
         else:
             game_context.phase = game_context.get_phase('PayRent')
         return game_context
+
+    def __repr__(self):
+        return 'Square Effect Phase'
+

@@ -11,3 +11,6 @@ class BSMT(game_phases.game_phase.GamePhase):
             game_state.next_player()
         game_context.phase = game_context.get_phase('DiceRoll')
         return game_context
+
+    def __repr__(self):
+        return 'BSMT Phase'

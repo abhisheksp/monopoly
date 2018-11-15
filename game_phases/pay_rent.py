@@ -6,4 +6,9 @@ class PayRent(game_phases.game_phase.GamePhase):
         pass
 
     def apply(self, game_context, action=None):
-        pass
+        game_context.phase = game_context.get_phase('BSMT')
+        return game_context
+
+    def __repr__(self):
+        return 'Pay Rent Phase'
+

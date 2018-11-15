@@ -16,3 +16,9 @@ class Player:
 
     def double_roll(self):
         return self.previous_rolls[-1][0] == self.previous_rolls[-1][1]
+
+    def __repr__(self):
+        repr_str = 'ID: {}\n'.format(self.id)
+        repr_str += 'Rolled : {}\n'.format(self.previous_rolls[-1])
+        repr_str += 'Currently at : {}\n'.format(self.position)
+        return repr_str

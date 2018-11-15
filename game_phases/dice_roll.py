@@ -14,3 +14,7 @@ class DiceRoll(game_phases.game_phase.GamePhase):
         current_player.update_position(new_position)
         context.phase = context.get_phase('SquareEffect')
         return context
+
+    def __repr__(self):
+        return 'Dice Roll Phase'
+
