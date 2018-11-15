@@ -13,3 +13,7 @@ class BuyProperty(game_phases.game_phase.GamePhase):
             # TODO: change financial resources
         game_context.phase = game_context.get_phase('BSMT')
         return game_context
+
+    def __repr__(self):
+        return 'Buy Property Phase'
+

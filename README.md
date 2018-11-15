@@ -1,5 +1,7 @@
 # Monopoly Game Implementation
 
+Demo: `python demo.py`
+
 # Tested with Python 3.6
 
 # Contribution Guidelines
