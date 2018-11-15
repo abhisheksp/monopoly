@@ -1,7 +1,7 @@
 import game_phases.game_phase
 
 
-class PayRent(game_phases.game_phase.GamePhase):
+class BSMT(game_phases.game_phase.GamePhase):
     def __init__(self):
         pass
 
