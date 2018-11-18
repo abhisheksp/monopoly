@@ -13,5 +13,8 @@ class Property:
         self.owned_by = player
         self.type = PropertyType.OWNED
 
+    def rent(self):
+        return 100
+
     def __repr__(self):
         return '{}'.format(self.name)

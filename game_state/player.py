@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, id_, position=None, previous_rolls=None, agent=None):
+    def __init__(self, id_, amount=0, position=None, previous_rolls=None, agent=None):
         self.id = id_
         self.previous_rolls = previous_rolls
         if previous_rolls is None:
@@ -7,6 +7,10 @@ class Player:
 
         self.position = position
         self.agent = agent
+        self.amount = amount
+
+    def pay_rent(self, rent):
+        self.amount -= rent
 
     def update_roll(self, dice_roll):
         self.previous_rolls = self.previous_rolls[-1], dice_roll
