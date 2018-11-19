@@ -8,7 +8,7 @@ from game_state.game_state import GameState
 from game_state.player import Player
 
 
-class TestBSMT(TestCase):
+class BSMTTest(TestCase):
     def test_change_player_on_regular_roll(self):
         dice_roll_phase = DiceRoll()
         bsmt_phase = BSMT()

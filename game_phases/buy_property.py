@@ -8,12 +8,14 @@ class BuyProperty(game_phases.game_phase.GamePhase):
     def apply(self, game_context, action=None):
         game_state = game_context.state
         current_player = game_state.current_player
+        current_position = current_player.position
         if current_player.agent.buy_property(game_state):
-            current_player.position.own(current_player)
-            # TODO: change financial resources
-        game_context.phase = game_context.get_phase('BSMT')
+            current_position.own(current_player)
+            current_player.buy_property(current_position.cost)
+            game_context.phase = game_context.get_phase('BSMT')
+        else:
+            game_context.phase = game_context.get_phase('Auction')
         return game_context
 
     def __repr__(self):
         return 'Buy Property Phase'
-

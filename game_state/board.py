@@ -6,14 +6,14 @@ class Board:
     def __init__(self):
         # TODO: expand entire board and include rents
         self._squares = [
-            Property('Go', None, None, PropertyType.UNOWNED),
-            Property('Mediterranean Avenue', None, None, PropertyType.UNOWNED),
-            Property('Community Chest', None, None, PropertyType.COMMUNITY_CHEST),
-            Property('Baltic Avenue', None, None, PropertyType.UNOWNED),
-            Property('Income Tax', None, None, PropertyType.UNOWNED),
-            Property('Reading Railroad', None, None, PropertyType.UNOWNED),
-            Property('Oriental Avenue', None, None, PropertyType.UNOWNED),
-            Property('Chance', None, None, PropertyType.CHANCE)
+            Property('Go', None, 0, PropertyType.UNOWNED),
+            Property('Mediterranean Avenue', None, 100, PropertyType.UNOWNED),
+            Property('Community Chest', None, 0, PropertyType.COMMUNITY_CHEST),
+            Property('Baltic Avenue', None, 300, PropertyType.UNOWNED),
+            Property('Income Tax', None, 0, PropertyType.UNOWNED),
+            Property('Reading Railroad', None, 200, PropertyType.UNOWNED),
+            Property('Oriental Avenue', None, 300, PropertyType.UNOWNED),
+            Property('Chance', None, 0, PropertyType.CHANCE)
         ]
         self._reverse_index = {property_: i for i, property_ in enumerate(self._squares)}
 

@@ -9,7 +9,7 @@ from game_state.game_state import GameState
 from game_state.player import Player
 
 
-class TestPayRent(TestCase):
+class PayRentTest(TestCase):
     def test_apply_regular_property(self):
         bsmt_phase = BSMT()
         pay_rent_phase = PayRent()
