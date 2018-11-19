@@ -12,6 +12,9 @@ class Player:
     def pay_rent(self, rent):
         self.amount -= rent
 
+    def buy_property(self, cost):
+        self.amount -= cost
+
     def update_roll(self, dice_roll):
         self.previous_rolls = self.previous_rolls[-1], dice_roll
 
