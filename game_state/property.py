@@ -20,6 +20,9 @@ class Property:
     def build(self, count):
         self.houses += count
 
+    def sell_buildings(self, count):
+        self.houses -= count
+
     def rent(self):
         result = self._rent[self.houses]
         group_owned = all(map(lambda property_: self.owned_by is property_.owned_by, self.group))
