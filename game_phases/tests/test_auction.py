@@ -33,7 +33,7 @@ class AuctionTest(TestCase):
         game_state = GameState(players, board)
         game_phase = auction_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
         current_position = new_context.state.current_player.position
 
         self.assertTrue(new_context.phase is bsmt_phase)

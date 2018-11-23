@@ -1,13 +1,13 @@
 import unittest
+from unittest.mock import MagicMock
+
 import utils.dice
 from game_phases.context import Context
 from game_phases.dice_roll import DiceRoll
 from game_phases.square_effect import SquareEffect
 from game_state.board import Board
-from game_state.player import Player
 from game_state.game_state import GameState
-
-from unittest.mock import MagicMock
+from game_state.player import Player
 
 
 class DiceRollTest(unittest.TestCase):
@@ -27,7 +27,7 @@ class DiceRollTest(unittest.TestCase):
         game_state = GameState(players, board)
         game_phase = dice_roll_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(new_context.phase is square_effect_phase)
         self.assertTrue(new_context.state.current_player.position is board.property_at(3))

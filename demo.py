@@ -54,8 +54,9 @@ def demo():
 
     # will be changed to terminal state based event looping
     num_moves = 100
+    action = None
     for _ in range(num_moves):
-        context = context.apply()
+        context, action = context.apply(action)
         print(context.phase)
         print(context.state)
 
