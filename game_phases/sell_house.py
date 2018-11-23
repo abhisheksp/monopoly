@@ -17,4 +17,4 @@ class SellHouse(game_phases.game_phase.GamePhase):
         return game_context, None
 
     def __repr__(self):
-        return 'Buy House Phase'
+        return 'Sell House Phase'
