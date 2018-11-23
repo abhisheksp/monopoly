@@ -9,6 +9,9 @@ class Player:
         self.agent = agent
         self.amount = amount
 
+    def increment(self, amount):
+        self.amount += amount
+
     def deduct(self, amount):
         self.amount -= amount
 
