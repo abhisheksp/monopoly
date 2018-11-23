@@ -2,7 +2,8 @@ from game_state.property_type import PropertyType
 
 
 class Property:
-    def __init__(self, name, color, cost, type_, houses=0, build_costs=None, rent=None, group=None, player=None):
+    def __init__(self, name, color, cost, type_, houses=0, build_costs=None, mortgage_value=0, rent=None, group=None,
+                 player=None):
         self.name = name
         self.color = color
         self.cost = cost
@@ -12,6 +13,7 @@ class Property:
         self._rent = rent or {}
         self.build_costs = build_costs or {}
         self.houses = houses
+        self.mortgage_value = mortgage_value
 
     def own(self, player):
         self.owned_by = player
@@ -29,6 +31,12 @@ class Property:
         if self.houses == 0 and self.group and group_owned:
             result = self._rent[self.houses] * 2
         return result
+
+    def mortgage(self):
+        self.type = PropertyType.MORTGAGED
+
+    def unmortgage(self):
+        self.type = PropertyType.OWNED
 
     def __repr__(self):
         return '{}'.format(self.name)

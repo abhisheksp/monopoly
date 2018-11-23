@@ -6,9 +6,9 @@ class BSMT(game_phases.game_phase.GamePhase):
     def __init__(self):
         pass
 
-    def _next_action(self, decision, game_state):
-        if decision is None:
-            return None
+    def _next_action(self, decision, decision_type, game_state):
+        if decision is None or decision_type == Action.MORTGAGE_PROPERTY:
+            return decision
         property_number, count = decision
         property_ = game_state.board.property_at(property_number)
         return property_, 'House', count
@@ -18,12 +18,15 @@ class BSMT(game_phases.game_phase.GamePhase):
         players = list(game_state.players)
         players.insert(0, players.pop(players.index(game_state.current_player)))  # Give preference to current player
         decision_type, decision = game_state.current_player.agent.bsmt_decision(game_state)
-        next_action = self._next_action(decision, game_state)
+        next_action = self._next_action(decision, decision_type, game_state)
         if decision_type == Action.BUY_HOUSE:
             game_context.phase = game_context.get_phase('BuyHouse')
             return game_context, next_action
         elif decision_type == Action.SELL_HOUSE:
             game_context.phase = game_context.get_phase('SellHouse')
+            return game_context, next_action
+        elif decision_type == Action.MORTGAGE_PROPERTY:
+            game_context.phase = game_context.get_phase('MortgageProperty')
             return game_context, next_action
         if not game_state.current_player.double_roll():
             game_state.next_player()
