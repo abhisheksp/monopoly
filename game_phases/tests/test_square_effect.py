@@ -29,7 +29,7 @@ class SquareEffectTest(unittest.TestCase):
         game_state = GameState(players)
         game_phase = square_effect_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(isinstance(new_context.phase, BuyProperty))
 
@@ -53,7 +53,7 @@ class SquareEffectTest(unittest.TestCase):
         game_state = GameState(players)
         game_phase = square_effect_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(isinstance(new_context.phase, DiceRoll))
 
@@ -77,7 +77,7 @@ class SquareEffectTest(unittest.TestCase):
         game_state = GameState(players)
         game_phase = square_effect_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(isinstance(new_context.phase, PayRent))
 

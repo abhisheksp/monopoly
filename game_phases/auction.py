@@ -14,7 +14,7 @@ class Auction(game_phases.game_phase.GamePhase):
         maximum_bidder.deduct(bid_amount)
         current_position.own(maximum_bidder)
         game_context.phase = game_context.get_phase('BSMT')
-        return game_context
+        return game_context, None
 
     def __repr__(self):
         return 'Auction Phase'

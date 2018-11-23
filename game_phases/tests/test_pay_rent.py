@@ -28,7 +28,7 @@ class PayRentTest(TestCase):
         game_state.next_player()
         game_phase = pay_rent_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertEqual(new_context.state.current_player.amount, 900)

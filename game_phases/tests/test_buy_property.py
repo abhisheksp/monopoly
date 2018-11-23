@@ -30,7 +30,7 @@ class BuyPropertyTest(TestCase):
         game_state = GameState(players, board)
         game_phase = buy_property_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertTrue(new_context.state.current_player.position.owned_by is player_1)
@@ -54,7 +54,7 @@ class BuyPropertyTest(TestCase):
         game_state = GameState(players, board)
         game_phase = buy_property_phase
         context = Context(phases, game_state, game_phase)
-        new_context = context.apply()
+        new_context, next_action = context.apply()
 
         self.assertTrue(new_context.phase is auction_phase)
         self.assertEqual(new_context.state.current_player.amount, 900)

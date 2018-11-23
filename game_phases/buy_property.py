@@ -15,7 +15,7 @@ class BuyProperty(game_phases.game_phase.GamePhase):
             game_context.phase = game_context.get_phase('BSMT')
         else:
             game_context.phase = game_context.get_phase('Auction')
-        return game_context
+        return game_context, None
 
     def __repr__(self):
         return 'Buy Property Phase'

@@ -1,12 +1,8 @@
 from unittest import TestCase
-from unittest.mock import MagicMock
 
-from adapter.agent import Agent
 from game_phases import Context
-from game_phases.auction import Auction
 from game_phases.bsmt import BSMT
 from game_phases.buy_house import BuyHouse
-from game_phases.square_effect import SquareEffect
 from game_state.bank import Bank
 from game_state.board import Board
 from game_state.game_state import GameState
@@ -34,7 +30,7 @@ class BuyHouseTest(TestCase):
         context = Context(phases, game_state, game_phase)
         action = (mediterranean_avenue, 'House', 2)
 
-        new_context = context.apply(action)
+        new_context, next_action = context.apply(action)
 
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertEqual(mediterranean_avenue.houses, 2)

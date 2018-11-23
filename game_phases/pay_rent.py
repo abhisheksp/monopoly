@@ -10,7 +10,7 @@ class PayRent(game_phases.game_phase.GamePhase):
         rent = current_player.position.rent()
         current_player.deduct(rent)
         game_context.phase = game_context.get_phase('BSMT')
-        return game_context
+        return game_context, None
 
     def __repr__(self):
         return 'Pay Rent Phase'
