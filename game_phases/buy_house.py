@@ -13,7 +13,6 @@ class BuyHouse(game_phases.game_phase.GamePhase):
             property_.build(count)
             build_cost = property_.build_costs[build_type] * count
             player.deduct(build_cost)
-        game_context.phase = game_context.get_phase('BSMT')
         return game_context, None
 
     def __repr__(self):

@@ -16,7 +16,6 @@ class MortgageProperty(game_phases.game_phase.GamePhase):
             property_.unmortgage()
             unmortgage_price = property_.mortgage_value * 1.1
             owner.deduct(unmortgage_price)
-        game_context.phase = game_context.get_phase('BSMT')
         return game_context, None
 
     def __repr__(self):

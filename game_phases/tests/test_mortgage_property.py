@@ -31,9 +31,8 @@ class MortgagePropertyTest(TestCase):
         context = Context(phases, game_state, game_phase)
         action = mediterranean_avenue
 
-        new_context, next_action = context.apply(action)
+        context.apply(action)
 
-        self.assertTrue(new_context.phase is bsmt_phase)
         self.assertTrue(mediterranean_avenue.type is PropertyType.MORTGAGED)
         self.assertEqual(player_1.amount, 700)
         self.assertEqual(player_2.amount, 500)
@@ -59,9 +58,8 @@ class MortgagePropertyTest(TestCase):
         context = Context(phases, game_state, game_phase)
         action = mediterranean_avenue
 
-        new_context, next_action = context.apply(action)
+        context.apply(action)
 
-        self.assertTrue(new_context.phase is bsmt_phase)
         self.assertTrue(mediterranean_avenue.type is PropertyType.OWNED)
         self.assertEqual(player_1.amount, 280)
         self.assertEqual(player_2.amount, 500)
