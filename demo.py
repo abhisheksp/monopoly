@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, Mock
 
 import utils
 from adapter.agent import Agent
-from game_phases.bsmt import BSMT
+from game_phases.bsmt_funcs import BSMT
 from game_phases.buy_property import BuyProperty
 from game_phases.context import Context
 from game_phases.dice_roll import DiceRoll

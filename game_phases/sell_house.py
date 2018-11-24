@@ -13,7 +13,6 @@ class SellHouse(game_phases.game_phase.GamePhase):
             property_.sell_buildings(count)
             selling_price = (property_.build_costs[build_type] * count) / 2
             player.increment(selling_price)
-        game_context.phase = game_context.get_phase('BSMT')
         return game_context, None
 
     def __repr__(self):
