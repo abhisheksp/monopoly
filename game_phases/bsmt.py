@@ -6,9 +6,30 @@ class BSMT(game_phases.game_phase.GamePhase):
     def __init__(self):
         pass
 
-    def _next_action(self, decision, decision_type, game_state):
+    def _next_action(self, player, decision, decision_type, game_state):
         if decision is None or decision_type == Action.MORTGAGE_PROPERTY:
             return decision
+        if decision_type == Action.TRADE_PROPERTY:
+            trades = []
+            selling_price, selling_properties, requesting_price, requesting_properties = decision
+            other_player = game_state.other_player(player)
+            if len(selling_properties) > 0:
+                trade = {
+                    'buyer': other_player,
+                    'seller': player,
+                    'price': selling_price,
+                    'properties': selling_properties
+                }
+                trades.append(trade)
+            if len(requesting_properties) > 0:
+                trade = {
+                    'buyer': player,
+                    'seller': other_player,
+                    'price': requesting_price,
+                    'properties': requesting_properties
+                }
+                trades.append(trade)
+            return trades
         property_number, count = decision
         property_ = game_state.board.property_at(property_number)
         return property_, 'House', count
@@ -35,7 +56,7 @@ class BSMT(game_phases.game_phase.GamePhase):
     def _player_bsmt(self, game_context, player):
         game_state = game_context.state
         decision_type, decision = player.agent.bsmt_decision(game_state)
-        next_action = self._next_action(decision, decision_type, game_state)
+        next_action = self._next_action(player, decision, decision_type, game_state)
         if decision_type == Action.BUY_HOUSE:
             buy_house_phase = game_context.get_phase('BuyHouse')
             game_context = buy_house_phase.apply(game_context, next_action)
@@ -45,6 +66,13 @@ class BSMT(game_phases.game_phase.GamePhase):
         elif decision_type == Action.MORTGAGE_PROPERTY:
             mortgage_property_phase = game_context.get_phase('MortgageProperty')
             game_context = mortgage_property_phase.apply(game_context, next_action)
+        elif decision_type == Action.TRADE_PROPERTY:
+            player_1, player_2 = game_state.get_players()
+            other_player = player_2 if player is player_1 else player_1
+            other_player_decision, _ = other_player.agent.respond_trade(game_context)
+            if other_player_decision:
+                trade_property_phase = game_context.get_phase('TradeProperty')
+                game_context = trade_property_phase.apply(game_context, next_action)
         return game_context, decision
 
     def __repr__(self):

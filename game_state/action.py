@@ -5,3 +5,4 @@ class Action(Enum):
     BUY_HOUSE = auto()
     SELL_HOUSE = auto()
     MORTGAGE_PROPERTY = auto()
+    TRADE_PROPERTY = auto()
