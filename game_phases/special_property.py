@@ -30,6 +30,12 @@ class SpecialProperty(game_phases.game_phase.GamePhase):
         elif next_chance == 2:
             st_charles_place = game_state.board.property_at(11)
             self._teleport_player(game_state, st_charles_place)
+        elif next_chance == 12:
+            st_charles_place = game_state.board.property_at(5)
+            self._teleport_player(game_state, st_charles_place)
+        elif next_chance == 13:
+            board_walk = game_state.board.property_at(39)
+            current_player.position = board_walk
 
     def _teleport_player(self, game_state, new_position):
         go_amount = 200
