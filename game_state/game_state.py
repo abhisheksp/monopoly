@@ -18,6 +18,11 @@ class GameState:
         players.insert(0, players.pop(players.index(self.current_player)))
         return players
 
+    # Trade API design restricts number of players to 2
+    def other_player(self, player):
+        player_1, player_2 = self.players
+        return player_2 if player is player_1 else player_1
+
     def __repr__(self):
         state_str = '-----------------\n'
         state_str += 'Current Player: {}\n'.format(self.current_player)

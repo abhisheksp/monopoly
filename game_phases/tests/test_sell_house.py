@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 from game_phases import Context
-from game_phases.bsmt import BSMT
 from game_phases.sell_house import SellHouse
 from game_state.bank import Bank
 from game_state.board import Board
@@ -12,11 +11,7 @@ from game_state.player import Player
 class SellHouseTest(TestCase):
     def test_apply(self):
         sell_house_phase = SellHouse()
-        bsmt_phase = BSMT()
-        phases = {
-            'SellHouse': sell_house_phase,
-            'BSMT': bsmt_phase,
-        }
+        phases = {}
         board = Board()
         player_1 = Player(1, amount=500, position=board.property_at(1))
         player_2 = Player(2, amount=500, position=board.property_at(0))

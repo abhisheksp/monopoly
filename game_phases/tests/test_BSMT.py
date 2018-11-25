@@ -8,6 +8,7 @@ from game_phases.context import Context
 from game_phases.dice_roll import DiceRoll
 from game_phases.mortgage_property import MortgageProperty
 from game_phases.sell_house import SellHouse
+from game_phases.trade_property import TradeProperty
 from game_state.action import Action
 from game_state.board import Board
 from game_state.game_state import GameState
@@ -113,6 +114,55 @@ class BSMTTest(TestCase):
         context.apply()
 
         mortgage_property_phase.apply.assert_called_once()
+
+    def test_trade_property_action(self):
+        bsmt_phase = BSMT()
+        trade_property_phase = TradeProperty()
+        dice_roll_phase = DiceRoll()
+        phases = {
+            'TradeProperty': trade_property_phase,
+            'BSMT': bsmt_phase,
+            'DiceRoll': dice_roll_phase,
+
+        }
+        board = Board()
+        agent_1 = Agent()
+        agent_2 = Agent()
+        player_1 = Player(1, position=board.property_at(0), agent=agent_1)
+        player_2 = Player(2, position=board.property_at(1), agent=agent_2)
+        mediterranean_avenue = board.property_at(1)
+        mediterranean_avenue.own(player_1)
+        baltic_avenue = board.property_at(3)
+        baltic_avenue.own(player_1)
+        reading_railroad = board.property_at(5)
+        reading_railroad.own(player_2)
+        oriental_avenue = board.property_at(6)
+        oriental_avenue.own(player_2)
+        agent_1_mock = Mock()
+        agent_1_mock.side_effect = iter([
+            (
+                Action.TRADE_PROPERTY,
+                (200, [mediterranean_avenue, baltic_avenue], 400, [reading_railroad, oriental_avenue])
+            ),
+            (None, None)
+        ])
+        agent_1.bsmt_decision = agent_1_mock
+        agent_2.bsmt_decision = MagicMock(return_value=(None, None))
+        agent_2.respond_trade = MagicMock(return_value=(True, None))
+        players = [player_1, player_2]
+        game_state = GameState(players, board)
+        game_state.next_player()
+        game_phase = bsmt_phase
+        context = Context(phases, game_state, game_phase)
+        trade_property_phase.apply = MagicMock(return_value=context)
+        expected_trades = [
+            {'buyer': player_2, 'seller': player_1, 'price': 200, 'properties': [mediterranean_avenue, baltic_avenue]},
+            {'buyer': player_1, 'seller': player_2, 'price': 400, 'properties': [reading_railroad, oriental_avenue]}
+        ]
+
+        context.apply()
+
+        trade_property_phase.apply.assert_called_once_with(context, expected_trades)
 
     def test_change_player_on_regular_roll(self):
         dice_roll_phase = DiceRoll()
