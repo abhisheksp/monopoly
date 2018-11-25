@@ -26,7 +26,15 @@ class SpecialProperty(game_phases.game_phase.GamePhase):
             current_player.increment(go_amount)
         elif next_chance == 1:
             illinois_avenue = game_state.board.property_at(24)
-            old_position = current_player.position
-            current_player.position = illinois_avenue
-            increment_amount = go_amount if game_state.board.passes_go(old_position, illinois_avenue) else 0
-            current_player.increment(increment_amount)
+            self._teleport_player(game_state, illinois_avenue)
+        elif next_chance == 2:
+            st_charles_place = game_state.board.property_at(11)
+            self._teleport_player(game_state, st_charles_place)
+
+    def _teleport_player(self, game_state, new_position):
+        go_amount = 200
+        current_player = game_state.current_player
+        old_position = current_player.position
+        current_player.position = new_position
+        increment_amount = go_amount if game_state.board.passes_go(old_position, new_position) else 0
+        current_player.increment(increment_amount)
