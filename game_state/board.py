@@ -48,6 +48,9 @@ class Board:
         new_position_idx = (current_position_idx + sum(dice_roll)) % 40
         return self._squares[new_position_idx]
 
+    def passes_go(self, old_position, new_position):
+        pass
+
     def property_at(self, position):
         return self._squares[position]
 
