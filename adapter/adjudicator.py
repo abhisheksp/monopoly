@@ -10,8 +10,8 @@ class Adjudicator:
         action = None
         while count < len(dice_rolls):
             context, action = context.apply(action)
-            print(context.phase)
-            print(context.state)
+            # print(context.phase)
+            # print(context.state)
             if str(context.phase) == 'Turn End Phase':
                 count += 1
         return None, adapter.game_state.parse(context)

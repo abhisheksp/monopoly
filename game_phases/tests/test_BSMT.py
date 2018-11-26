@@ -45,7 +45,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        buy_house_phase.apply = MagicMock(return_value=context)
+        buy_house_phase.apply = MagicMock(return_value=(context, None))
         context.apply()
 
         buy_house_phase.apply.assert_called_once()
@@ -78,7 +78,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        sell_house_phase.apply = MagicMock(return_value=context)
+        sell_house_phase.apply = MagicMock(return_value=(context, None))
 
         context.apply()
 
@@ -110,7 +110,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        mortgage_property_phase.apply = MagicMock(return_value=context)
+        mortgage_property_phase.apply = MagicMock(return_value=(context, None))
 
         context.apply()
 
@@ -154,7 +154,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        trade_property_phase.apply = MagicMock(return_value=context)
+        trade_property_phase.apply = MagicMock(return_value=(context, None))
         expected_trades = [
             {'buyer': player_2, 'seller': player_1, 'price': 200, 'properties': [mediterranean_avenue, baltic_avenue]},
             {'buyer': player_1, 'seller': player_2, 'price': 400, 'properties': [reading_railroad, oriental_avenue]}

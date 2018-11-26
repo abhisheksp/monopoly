@@ -39,5 +39,6 @@ class Player:
     def __repr__(self):
         repr_str = 'ID: {}\n'.format(self.id)
         repr_str += 'Amount : {}\n'.format(self.amount)
+        repr_str += 'Debt : {}\n'.format(self._debt)
         repr_str += 'Currently at : {}\n'.format(self.position)
         return repr_str

@@ -9,10 +9,11 @@ class SquareEffect(game_phases.game_phase.GamePhase):
     def apply(self, game_context, action=None):
         game_state = game_context.state
         current_player = game_state.current_player
-        if current_player.position.type == PropertyType.UNOWNED:
+        current_position = current_player.position
+        if current_position.type is PropertyType.UNOWNED:
             game_context.phase = game_context.get_phase('BuyProperty')
-        elif current_player.position.owned_by is current_player:
-            game_context.phase = game_context.get_phase('DiceRoll')
+        elif current_position.type is PropertyType.MORTGAGED or current_position.owned_by is current_player:
+            game_context.phase = game_context.get_phase('BSMT')
         else:
             game_context.phase = game_context.get_phase('PayRent')
         return game_context, None

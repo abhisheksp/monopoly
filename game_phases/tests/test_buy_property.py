@@ -44,6 +44,7 @@ class BuyPropertyTest(TestCase):
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertTrue(new_context.state.current_player.position.owned_by is player_1)
         self.assertEqual(new_context.state.current_player.amount, 20)
+        self.assertEqual(new_context.state.current_player._debt['bank'], 0)
 
     def test_player_declines_buying_property(self):
         buy_property_phase = BuyProperty()

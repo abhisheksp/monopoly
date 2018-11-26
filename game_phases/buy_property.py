@@ -15,7 +15,7 @@ class BuyProperty(game_phases.game_phase.GamePhase):
             game_context, _ = bsmt_phase.apply(game_context, None)
             current_position.own(current_player)
             current_player.deduct(current_position.cost)
-            current_player.deduct_debt(opponents=current_position.cost)
+            current_player.deduct_debt(bank=current_position.cost)
             game_context.phase = game_context.get_phase('BSMT')
         else:
             game_context.phase = game_context.get_phase('Auction')
