@@ -1,3 +1,6 @@
+from game_state.action import Action
+
+
 class Agent:
     """
     Adapter to external Agent
@@ -10,7 +13,12 @@ class Agent:
         return self.external_agent.buyProperty(state)
 
     def bsmt_decision(self, state):
-        return self.external_agent.getBMSTDecision(state)
+        ext_decision = self.external_agent.getBMSTDecision(state)
+        if ext_decision[0] == 'M':
+            action_type = Action.MORTGAGE_PROPERTY
+            property_ = state.board.property_at(ext_decision[1][0])
+            return action_type, property_
+        return ext_decision
 
     def auction_property(self, state):
         return self.external_agent.auctionProperty(state)

@@ -13,7 +13,7 @@ class Property:
         self._rent = rent or {}
         self.build_costs = build_costs or {}
         self.houses = houses
-        self.mortgage_value = mortgage_value
+        self.mortgage_value = cost * 0.5 if cost else mortgage_value
 
     def own(self, player):
         self.owned_by = player

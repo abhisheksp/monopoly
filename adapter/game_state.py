@@ -25,7 +25,7 @@ def parse(game_context):
     player_positions = player_1_position, player_2_position
     current_phase = str(game_context.phase)
     current_phase_details = None
-    debt = player_1.debt[0], player_1.debt[1], player_2.debt[0], player_2.debt[1]
+    debt = player_1._debt['bank'], player_1._debt['opponents'], player_2._debt['bank'], player_2._debt['opponents']
     past_states = []
     return turn_number, properties_42_tuple, players_cash, player_positions, current_phase, current_phase_details, debt, past_states
 

@@ -45,7 +45,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        buy_house_phase.apply = MagicMock(return_value=context)
+        buy_house_phase.apply = MagicMock(return_value=(context, None))
         context.apply()
 
         buy_house_phase.apply.assert_called_once()
@@ -78,7 +78,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        sell_house_phase.apply = MagicMock(return_value=context)
+        sell_house_phase.apply = MagicMock(return_value=(context, None))
 
         context.apply()
 
@@ -110,7 +110,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        mortgage_property_phase.apply = MagicMock(return_value=context)
+        mortgage_property_phase.apply = MagicMock(return_value=(context, None))
 
         context.apply()
 
@@ -154,7 +154,7 @@ class BSMTTest(TestCase):
         game_state.next_player()
         game_phase = bsmt_phase
         context = Context(phases, game_state, game_phase)
-        trade_property_phase.apply = MagicMock(return_value=context)
+        trade_property_phase.apply = MagicMock(return_value=(context, None))
         expected_trades = [
             {'buyer': player_2, 'seller': player_1, 'price': 200, 'properties': [mediterranean_avenue, baltic_avenue]},
             {'buyer': player_1, 'seller': player_2, 'price': 400, 'properties': [reading_railroad, oriental_avenue]}
@@ -163,51 +163,3 @@ class BSMTTest(TestCase):
         context.apply()
 
         trade_property_phase.apply.assert_called_once_with(context, expected_trades)
-
-    def test_change_player_on_regular_roll(self):
-        self.skipTest('wip')
-        dice_roll_phase = DiceRoll()
-        bsmt_phase = BSMT()
-        phases = {
-            'DiceRoll': dice_roll_phase,
-            'BSMT': bsmt_phase,
-        }
-        board = Board()
-        regular_roll = ((1, 2), (2, 3))
-        agent = Agent()
-        agent.bsmt_decision = MagicMock(return_value=(None, None))
-        player_1 = Player(1, position=board.property_at(1), previous_rolls=regular_roll, agent=agent)
-        player_2 = Player(2, position=board.property_at(0), agent=agent)
-        players = [player_1, player_2]
-        game_state = GameState(players, board)
-        game_phase = bsmt_phase
-        context = Context(phases, game_state, game_phase)
-
-        new_context, next_action = context.apply()
-
-        self.assertTrue(new_context.phase is dice_roll_phase)
-        self.assertTrue(new_context.state.current_player is player_2)
-
-    def test_change_player_on_double_roll(self):
-        self.skipTest('wip')
-        dice_roll_phase = DiceRoll()
-        bsmt_phase = BSMT()
-        phases = {
-            'DiceRoll': dice_roll_phase,
-            'BSMT': bsmt_phase,
-        }
-        board = Board()
-        double_roll = ((1, 2), (2, 2))
-        agent = Agent()
-        agent.bsmt_decision = MagicMock(return_value=(None, None))
-        player_1 = Player(1, position=board.property_at(1), previous_rolls=double_roll, agent=agent)
-        player_2 = Player(2, position=board.property_at(0), agent=agent)
-        players = [player_1, player_2]
-        game_state = GameState(players, board)
-        game_phase = bsmt_phase
-        context = Context(phases, game_state, game_phase)
-
-        new_context, next_action = context.apply()
-
-        self.assertTrue(new_context.phase is dice_roll_phase)
-        self.assertTrue(new_context.state.current_player is player_1)
