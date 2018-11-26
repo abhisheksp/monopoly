@@ -51,6 +51,12 @@ class Board:
     def passes_go(self, old_position, new_position):
         pass
 
+    def nearest_utility(self, position):
+        pass
+
+    def nearest_railroad(self, position):
+        pass
+
     def property_at(self, position):
         return self._squares[position]
 
