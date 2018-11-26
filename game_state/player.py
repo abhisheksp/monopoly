@@ -8,9 +8,7 @@ class Player:
         self.position = position
         self.agent = agent
         self.amount = amount
-
-        # TODO
-        self.debt = (0, 0, 0, 0)
+        self._debt = {'bank': 0, 'opponents': 0}
 
     def increment(self, amount):
         self.amount += amount
@@ -26,6 +24,17 @@ class Player:
 
     def double_roll(self):
         return self.previous_rolls[-1][0] == self.previous_rolls[-1][1]
+
+    def debt(self):
+        return self._debt['bank'] + self._debt['opponents']
+
+    def add_debt(self, bank=None, opponents=None):
+        self._debt['bank'] += bank if bank is not None else 0
+        self._debt['opponents'] += opponents if opponents is not None else 0
+
+    def deduct_debt(self, bank=None, opponents=None):
+        self._debt['bank'] -= bank if bank is not None else 0
+        self._debt['opponents'] -= opponents if opponents is not None else 0
 
     def __repr__(self):
         repr_str = 'ID: {}\n'.format(self.id)

@@ -12,6 +12,13 @@ from game_state.player import Player
 
 
 class BuyPropertyTest(TestCase):
+    @staticmethod
+    def fake_bsmt_cycle(amount):
+        def return_func(context, _):
+            context.state.current_player.increment(amount)
+            return context, None
+        return return_func
+
     def test_player_buys_property(self):
         buy_property_phase = BuyProperty()
         bsmt_phase = BSMT()
@@ -24,17 +31,19 @@ class BuyPropertyTest(TestCase):
         agent.buy_property = MagicMock(return_value=True)
         current_position = board.property_at(1)
         current_position.cost = 100
-        player_1 = Player(1, amount=800, position=current_position, agent=agent)
+        player_1 = Player(1, amount=20, position=current_position, agent=agent)
         player_2 = Player(2)
         players = [player_1, player_2]
         game_state = GameState(players, board)
         game_phase = buy_property_phase
         context = Context(phases, game_state, game_phase)
+        bsmt_phase.apply = self.fake_bsmt_cycle(100)
+
         new_context, next_action = context.apply()
 
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertTrue(new_context.state.current_player.position.owned_by is player_1)
-        self.assertEqual(new_context.state.current_player.amount, 700)
+        self.assertEqual(new_context.state.current_player.amount, 20)
 
     def test_player_declines_buying_property(self):
         buy_property_phase = BuyProperty()
