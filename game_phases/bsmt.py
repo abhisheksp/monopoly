@@ -39,7 +39,7 @@ class BSMT(game_phases.game_phase.GamePhase):
         game_state = game_context.state
         if not game_state.current_player.double_roll():
             game_state.next_player()
-        game_context.phase = game_context.get_phase('DiceRoll')
+        game_context.phase = game_context.get_phase('TurnEnd')
         return game_context, None
 
     def _bsmt_cycle(self, game_context):

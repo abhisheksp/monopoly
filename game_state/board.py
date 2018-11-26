@@ -24,6 +24,8 @@ class Board:
             types_ = defaultdict(lambda: PropertyType.UNOWNED)
             types_['Chance'] = PropertyType.CHANCE
             types_['Chest'] = PropertyType.COMMUNITY_CHEST
+            types_['Chance Special'] = PropertyType.JAIL_CHANCE
+            types_['Community Chest Special'] = PropertyType.JAIL_COMMUNITY_CHEST
             type_ = types_[square['type']]
             group = []
             if int(square['group_size']) > 0:
@@ -70,7 +72,7 @@ class Board:
 
     def __repr__(self):
         repr_str = '********** BOARD ***********\n'
-        for square in self._squares:
+        for _, square in self._squares.items():
             if square.type == PropertyType.OWNED:
                 repr_str += '{} owns {}\n'.format(square.owned_by.id, square.name)
         repr_str += '****************************\n'
