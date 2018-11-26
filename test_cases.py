@@ -12,7 +12,6 @@ def player_1():
     external_agent.getBMSTDecision = MagicMock(return_value=(None, None))
     return Agent(external_agent)
 
-
 def player_2():
     external_agent = mock.Mock()
     external_agent.buyProperty = MagicMock(return_value=False)
