@@ -9,7 +9,7 @@ class Auction(game_phases.game_phase.GamePhase):
         game_state = game_context.state
         current_player = game_state.current_player
         current_position = current_player.position
-        bids = map(lambda x: (x[1], x[1].agent.auction_property()), enumerate(game_state.players))
+        bids = map(lambda x: (x[1], x[1].agent.auction_property(game_context)), enumerate(game_state.players))
         maximum_bidder, bid_amount = max(bids, key=lambda bid: bid[1])
         maximum_bidder.deduct(bid_amount)
         current_position.own(maximum_bidder)

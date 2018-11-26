@@ -723,5 +723,35 @@
       "group": [
         37
       ]
+    },
+    "40": {
+      "type": "Chance Special",
+      "name": "Get Out of Jail Card",
+      "color": "None",
+      "group_size": 0,
+      "value": 0,
+      "build_cost": 0,
+      "rent": 0,
+      "rent_house_1": 0,
+      "rent_house_2": 0,
+      "rent_house_3": 0,
+      "rent_house_4": 0,
+      "rent_hotel": 0,
+      "tax": 0
+    },
+    "41": {
+      "type": "Community Chest Special",
+      "name": "Get Out of Jail Card",
+      "color": "None",
+      "group_size": 0,
+      "value": 0,
+      "build_cost": 0,
+      "rent": 0,
+      "rent_house_1": 0,
+      "rent_house_2": 0,
+      "rent_house_3": 0,
+      "rent_house_4": 0,
+      "rent_hotel": 0,
+      "tax": 0
     }
   }

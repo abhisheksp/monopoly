@@ -9,4 +9,5 @@ class PropertyType(Enum):
     CHANCE = auto()
     COMMUNITY_CHEST = auto()
     INCOME_TAX = auto()
-    SPECIAL = auto()
+    JAIL_CHANCE = auto()
+    JAIL_COMMUNITY_CHEST = auto()

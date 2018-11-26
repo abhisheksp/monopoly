@@ -9,6 +9,9 @@ class GameState:
         self.board = board
         self.bank = bank
 
+        # TODO
+        self.turn_number = 0
+
     def next_player(self):
         self.current_player = next(self.players_iter)
 

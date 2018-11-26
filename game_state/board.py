@@ -24,6 +24,8 @@ class Board:
             types_ = defaultdict(lambda: PropertyType.UNOWNED)
             types_['Chance'] = PropertyType.CHANCE
             types_['Chest'] = PropertyType.COMMUNITY_CHEST
+            types_['Chance Special'] = PropertyType.JAIL_CHANCE
+            types_['Community Chest Special'] = PropertyType.JAIL_COMMUNITY_CHEST
             type_ = types_[square['type']]
             group = []
             if int(square['group_size']) > 0:
@@ -31,7 +33,7 @@ class Board:
             return Property(name, color, cost, type_, build_costs=build_costs, mortgage_value=mortgage_value, rent=rent,
                             group=group)
 
-        with open('/Users/abhisheksp/workspace/monopoly/board.json') as f:
+        with open('board.json') as f:
             board_data = json.load(f)
             properties = dict(map(lambda x: (int(x[0]), json_mapper(x[1])), board_data.items()))
             for _, property_ in properties.items():
@@ -70,7 +72,7 @@ class Board:
 
     def __repr__(self):
         repr_str = '********** BOARD ***********\n'
-        for square in self._squares:
+        for _, square in self._squares.items():
             if square.type == PropertyType.OWNED:
                 repr_str += '{} owns {}\n'.format(square.owned_by.id, square.name)
         repr_str += '****************************\n'

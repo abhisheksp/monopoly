@@ -9,6 +9,9 @@ class Player:
         self.agent = agent
         self.amount = amount
 
+        # TODO
+        self.debt = (0, 0, 0, 0)
+
     def increment(self, amount):
         self.amount += amount
 
@@ -26,6 +29,6 @@ class Player:
 
     def __repr__(self):
         repr_str = 'ID: {}\n'.format(self.id)
-        repr_str += 'Rolled : {}\n'.format(self.previous_rolls[-1])
+        repr_str += 'Amount : {}\n'.format(self.amount)
         repr_str += 'Currently at : {}\n'.format(self.position)
         return repr_str
