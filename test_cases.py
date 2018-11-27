@@ -55,11 +55,24 @@ def test_2():
     dice_rolls = [(1, 2), (1, 2)]
     _, state = Adjudicator.runGame(agent_1, agent_2, dice_rolls)
     expected_state = (0, (
-    0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0), (1470.0, 1500), (3, 3), 'Turn End Phase', None, (0, 0, 0, 0), [])
+        0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0,
+        0, 0, 0), (1470.0, 1500), (3, 3), 'Turn End Phase', None, (0, 0, 0, 0), [])
+    assert (state == expected_state)
+
+
+def test_3():
+    agent_1 = player_1()
+    agent_2 = player_2()
+    dice_rolls = [(6, 1), (1, 6), (1, 6)]
+    _, state = Adjudicator.runGame(agent_1, agent_2, dice_rolls)
+    expected_state = (0, (
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0), (1700, 1500), (11, 24), 'Turn End Phase', None, (0, 0, 0, 0), [])
     assert (state == expected_state)
 
 
 if __name__ == '__main__':
     test_1()
     test_2()
+    test_3()

@@ -9,6 +9,7 @@ from game_phases.buy_property import BuyProperty
 from game_phases.dice_roll import DiceRoll
 from game_phases.mortgage_property import MortgageProperty
 from game_phases.pay_rent import PayRent
+from game_phases.special_property import SpecialProperty
 from game_phases.square_effect import SquareEffect
 from game_phases.turn_end import TurnEnd
 from game_state.board import Board
@@ -29,6 +30,7 @@ def context_factory(agent_1, agent_2, dice_rolls):
     auction_phase = Auction()
     turn_end_phase = TurnEnd()
     mortgage_property_phase = MortgageProperty()
+    special_property_phase = SpecialProperty()
     phases = {
         'DiceRoll': dice_roll_phase,
         'SquareEffect': square_effect_phase,
@@ -37,6 +39,7 @@ def context_factory(agent_1, agent_2, dice_rolls):
         'MortgageProperty': mortgage_property_phase,
         'PayRent': pay_rent_phase,
         'Auction': auction_phase,
+        'SpecialProperty': special_property_phase,
         'TurnEnd': turn_end_phase,
     }
     board = Board()
