@@ -16,6 +16,8 @@ class PayRent(game_phases.game_phase.GamePhase):
         else:
             current_player.deduct(rent)
             current_player.deduct_debt(opponents=rent)
+            owner = current_player.position.owned_by
+            owner.increment(rent)
             game_context.phase = game_context.get_phase('BSMT')
         return game_context, None
 

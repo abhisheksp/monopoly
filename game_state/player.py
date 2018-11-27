@@ -3,7 +3,7 @@ class Player:
         self.id = id_
         self.previous_rolls = previous_rolls
         if previous_rolls is None:
-            self.previous_rolls = (0, 0), (0, 0)
+            self.previous_rolls = (-1, -2), (None, None)
 
         self.position = position
         self.agent = agent
@@ -23,7 +23,7 @@ class Player:
         self.position = new_position
 
     def double_roll(self):
-        return self.previous_rolls[-1][0] == self.previous_rolls[-1][1]
+        return self.previous_rolls[-1] == self.previous_rolls[-2]
 
     def debt(self):
         return self._debt['bank'] + self._debt['opponents']

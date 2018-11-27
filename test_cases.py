@@ -1,3 +1,4 @@
+from itertools import chain, repeat
 from unittest import mock
 from unittest.mock import MagicMock, Mock
 
@@ -37,6 +38,22 @@ def player_4():
     return Agent(external_agent)
 
 
+def player_5():
+    external_agent = mock.Mock()
+    external_agent.buyProperty = MagicMock(return_value=True)
+    bsmt_decision_mock = Mock()
+    bsmt_decision_mock.side_effect = chain(repeat((None, None), times=5), [('M', [9])], repeat((None, None)))
+    external_agent.getBMSTDecision = bsmt_decision_mock
+    return Agent(external_agent)
+
+
+def player_6():
+    external_agent = mock.Mock()
+    external_agent.buyProperty = MagicMock(return_value=True)
+    external_agent.getBMSTDecision = MagicMock(return_value=(None, None))
+    return Agent(external_agent)
+
+
 def test_1():
     agent_1 = player_1()
     agent_2 = player_2()
@@ -67,8 +84,21 @@ def test_3():
     dice_rolls = [(6, 1), (1, 6), (1, 6)]
     _, state = Adjudicator.runGame(agent_1, agent_2, dice_rolls)
     expected_state = (0, (
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0), (1700, 1500), (11, 24), 'Turn End Phase', None, (0, 0, 0, 0), [])
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0,
+        0, 0, 0), (1700, 1500), (11, 24), 'Turn End Phase', None, (0, 0, 0, 0), [])
+    assert (state == expected_state)
+
+
+def test_4():
+    agent_1 = player_5()
+    agent_2 = player_6()
+    dice_rolls = [(3, 3), (6, 6), (1, 2), (6, 5), (6, 4), (6, 6), (1, 2), (4, 2), (5, 3), (4, 1)]
+    _, state = Adjudicator.runGame(agent_1, agent_2, dice_rolls)
+    expected_state = (0, (
+        0, -1, 0, 0, 0, 0, 1, 0, 1, 7, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1,
+        0,
+        0, 0, 0, 0, 0), (1252.0, 858), (8, 6), 'Turn End Phase', None, (0, 0, 0, 0), [])
     assert (state == expected_state)
 
 
@@ -76,3 +106,4 @@ if __name__ == '__main__':
     test_1()
     test_2()
     test_3()
+    test_4()

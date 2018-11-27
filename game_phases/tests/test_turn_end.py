@@ -46,7 +46,7 @@ class TurnEndTest(TestCase):
             'TurnEnd': turn_end_phase,
         }
         board = Board()
-        double_roll = ((1, 2), (2, 2))
+        double_roll = ((2, 2), (2, 2))
         player_1 = Player(1, position=board.property_at(1))
         player_2 = Player(2, position=board.property_at(0), previous_rolls=double_roll)
         players = [player_1, player_2]
