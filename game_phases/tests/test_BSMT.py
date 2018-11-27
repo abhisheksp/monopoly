@@ -5,7 +5,6 @@ from adapter.agent import Agent
 from game_phases.bsmt import BSMT
 from game_phases.buy_house import BuyHouse
 from game_phases.context import Context
-from game_phases.dice_roll import DiceRoll
 from game_phases.mortgage_property import MortgageProperty
 from game_phases.sell_house import SellHouse
 from game_phases.trade_property import TradeProperty

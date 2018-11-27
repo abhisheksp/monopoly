@@ -60,7 +60,6 @@ class SpecialProperty(game_phases.game_phase.GamePhase):
                 game_context.phase = game_context.get_phase('BSMT')
             else:
                 game_context.phase = game_context.get_phase('BSMT')
-
         elif next_chance == 12:
             st_charles_place = game_state.board.property_at(5)
             self._teleport_player(game_state, st_charles_place)
