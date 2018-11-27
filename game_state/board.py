@@ -33,7 +33,7 @@ class Board:
             return Property(name, color, cost, type_, build_costs=build_costs, mortgage_value=mortgage_value, rent=rent,
                             group=group)
 
-        with open('/Users/abhisheksp/workspace/monopoly/board.json') as f:
+        with open('board.json') as f:
             board_data = json.load(f)
             properties = dict(map(lambda x: (int(x[0]), json_mapper(x[1])), board_data.items()))
             for _, property_ in properties.items():

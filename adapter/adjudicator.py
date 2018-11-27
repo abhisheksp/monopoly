@@ -8,6 +8,8 @@ class Adjudicator:
         count = 0
         context = context_factory(player_1, player_2, dice_rolls)
         action = None
+        # print(context.phase)
+        # print(context.state)
         while count < len(dice_rolls):
             context, action = context.apply(action)
             # print(context.phase)

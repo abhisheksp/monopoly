@@ -28,7 +28,7 @@ class PayRentTest(TestCase):
             'TurnEnd': turn_end_phase,
         }
         board = Board()
-        player_1 = Player(1, position=board.property_at(0))
+        player_1 = Player(1, amount=100, position=board.property_at(0))
         player_2 = Player(2, amount=10, position=board.property_at(1))
         mediterranean_avenue = board.property_at(1)
         mediterranean_avenue.own(player_1)
@@ -45,6 +45,7 @@ class PayRentTest(TestCase):
 
         self.assertTrue(new_context.phase is bsmt_phase)
         self.assertEqual(new_context.state.current_player.amount, 10)
+        self.assertEqual(player_1.amount, 200)
 
     def test_apply_player_bankrupt(self):
         bsmt_phase = BSMT()
