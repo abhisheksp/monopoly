@@ -14,6 +14,8 @@ class SquareEffect(game_phases.game_phase.GamePhase):
             game_context.phase = game_context.get_phase('BuyProperty')
         elif current_position.type is PropertyType.MORTGAGED or current_position.owned_by is current_player:
             game_context.phase = game_context.get_phase('BSMT')
+        elif current_position.type in (PropertyType.CHANCE, PropertyType.COMMUNITY_CHEST):
+            game_context.phase = game_context.get_phase('SpecialProperty')
         else:
             game_context.phase = game_context.get_phase('PayRent')
         return game_context, None
